@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class PrintNumber {
     public static void main(String[] args) {
-
+        showPrompt();
+        getUserInput();
     }
 
     public static void showPrompt() {

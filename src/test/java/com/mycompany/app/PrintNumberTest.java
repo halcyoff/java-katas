@@ -4,29 +4,25 @@ import com.mycompany.app.Constants.PrintNumberConstants;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 
 public class PrintNumberTest {
 
-    PrintStream originalOut = System.out;
+    private final PrintStream originalOut = System.out;
+    private final InputStream originalIn = System.in;
 
     private static final int USER_INPUT = 123;
-    Scanner scanner = new Scanner(System.in);
 
     @BeforeEach
     public void beforeEach() {
-        initMocks(this);
-        Mockito.when(scanner.nextInt()).thenReturn(USER_INPUT);
+
     }
 
     @Test
@@ -41,18 +37,16 @@ public class PrintNumberTest {
 
     @Test
     public void testGetUserInput() {
+        System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
         int input = PrintNumber.getUserInput();
-        assertEquals(input, USER_INPUT);
-    }
 
-    @Test
-    public void incrementNumbersTest() {
-
+        assertEquals(USER_INPUT, input);
     }
 
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+        System.setIn(originalIn);
     }
 }
 //Description
