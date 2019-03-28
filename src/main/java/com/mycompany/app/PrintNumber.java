@@ -5,9 +5,11 @@ import com.mycompany.app.Constants.PrintNumberConstants;
 import java.util.Scanner;
 
 public class PrintNumber {
+    private static int userInput;
+
     public static void main(String[] args) {
         showPrompt();
-        getUserInput();
+        userInput = getUserInput();
     }
 
     public static void showPrompt() {
@@ -18,5 +20,9 @@ public class PrintNumber {
     public static int getUserInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+
+    public static void validateUserInput(int input) {
+
     }
 }

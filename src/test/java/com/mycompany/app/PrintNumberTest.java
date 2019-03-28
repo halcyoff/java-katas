@@ -19,6 +19,7 @@ public class PrintNumberTest {
     private final InputStream originalIn = System.in;
 
     private static final int USER_INPUT = 123;
+    private static final int INVALID_INPUT = -1;
 
     @BeforeEach
     public void beforeEach() {
@@ -41,6 +42,11 @@ public class PrintNumberTest {
         int input = PrintNumber.getUserInput();
 
         assertEquals(USER_INPUT, input);
+    }
+
+    @Test
+    public void testValidateUserInput() {
+        PrintNumber.validateUserInput(INVALID_INPUT);
     }
 
     @After
