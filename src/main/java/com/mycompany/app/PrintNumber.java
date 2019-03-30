@@ -9,20 +9,42 @@ public class PrintNumber {
 
     public static void main(String[] args) {
         showPrompt();
-        userInput = getUserInput();
+        getUserInputFromConsole();
+        System.out.print(userInput);
     }
 
     public static void showPrompt() {
-        System.out.println(PrintNumberConstants.WELCOME_MESSAGE);
-        System.out.print(PrintNumberConstants.PROMPT);
+        showWelcomeMessage();
+        showNumberPrompt();
     }
 
-    public static int getUserInput() {
+    public static void getUserInputFromConsole() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        userInput = scanner.nextInt();
+        validateUserInput(userInput);
     }
 
     public static void validateUserInput(int input) {
+        if (input < 0) {
+            showErrorMessage();
+            showNumberPrompt();
+            getUserInput();
+        }
+    }
 
+    public static int getUserInput() {
+        return userInput;
+    }
+
+    private static void showWelcomeMessage() {
+        System.out.println(PrintNumberConstants.WELCOME_MESSAGE);
+    }
+
+    private static void showNumberPrompt() {
+        System.out.print(PrintNumberConstants.NUMBER_PROMPT);
+    }
+
+    private static void showErrorMessage() {
+        System.out.println(PrintNumberConstants.ERROR_MESSAGE);
     }
 }

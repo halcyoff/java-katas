@@ -38,12 +38,13 @@ public class PrintNumberTest {
         PrintNumber.showPrompt();
 
         assertTrue(outMessages.toString().contains(PrintNumberConstants.WELCOME_MESSAGE));
-        assertTrue(outMessages.toString().contains(PrintNumberConstants.PROMPT));
+        assertTrue(outMessages.toString().contains(PrintNumberConstants.NUMBER_PROMPT));
     }
 
     @Test
     public void testGetUserInput() {
         System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
+        PrintNumber.getUserInputFromConsole();
         int input = PrintNumber.getUserInput();
 
         assertEquals(USER_INPUT, input);
@@ -51,8 +52,11 @@ public class PrintNumberTest {
 
     @Test
     public void testValidateUserInput() {
+        ByteArrayOutputStream outMessages = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outMessages, true));
         PrintNumber.validateUserInput(INVALID_INPUT);
-        Mockito.verify(PrintNumber.showErrorPrompt(), Mockito.times(1));
+        assertTrue(outMessages.toString().contains(PrintNumberConstants.ERROR_MESSAGE));
+        assertTrue(outMessages.toString().contains(PrintNumberConstants.NUMBER_PROMPT));
     }
 
     @After
