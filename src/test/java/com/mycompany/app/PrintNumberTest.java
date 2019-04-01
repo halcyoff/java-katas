@@ -22,6 +22,7 @@ public class PrintNumberTest {
 
     private static final int USER_INPUT = 123;
     private static final int INVALID_INPUT = -1;
+    private static final int FINAL_RESULT = 234;
 
     @Mock
     PrintNumberTest printNumberTest;
@@ -54,9 +55,20 @@ public class PrintNumberTest {
     public void testValidateUserInput() {
         ByteArrayOutputStream outMessages = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outMessages, true));
+        System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
         PrintNumber.validateUserInput(INVALID_INPUT);
+
         assertTrue(outMessages.toString().contains(PrintNumberConstants.ERROR_MESSAGE));
         assertTrue(outMessages.toString().contains(PrintNumberConstants.NUMBER_PROMPT));
+    }
+
+    @Test
+    public void testIncrementNumbers() {
+        int length = (int) (Math.log10(USER_INPUT) + 1);
+
+        for (int i = 0; i < length; i++) {
+            
+        }
     }
 
     @After

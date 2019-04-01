@@ -28,7 +28,7 @@ public class PrintNumber {
         if (input < 0) {
             showErrorMessage();
             showNumberPrompt();
-            getUserInput();
+            getUserInputFromConsole();
         }
     }
 
