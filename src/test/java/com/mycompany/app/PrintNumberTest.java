@@ -64,11 +64,9 @@ public class PrintNumberTest {
 
     @Test
     public void testIncrementNumbers() {
-        int length = (int) (Math.log10(USER_INPUT) + 1);
-
-        for (int i = 0; i < length; i++) {
-            
-        }
+        System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
+        PrintNumber.incrementNumbers();
+        assertEquals(FINAL_RESULT, PrintNumber.getUserInput());
     }
 
     @After
