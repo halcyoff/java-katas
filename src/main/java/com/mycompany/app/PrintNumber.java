@@ -2,18 +2,16 @@ package com.mycompany.app;
 
 import com.mycompany.app.Constants.PrintNumberConstants;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class PrintNumber {
     private static int userInput;
+    private static int finalResult;
 
     public static void main(String[] args) {
-//        showPrompt();
-//        getUserInputFromConsole();
-        userInput = 293;
+        showPrompt();
+        getUserInputFromConsole();
+//        userInput = 293;
         incrementNumbers();
     }
 
@@ -36,34 +34,25 @@ public class PrintNumber {
         }
     }
 
+    public static int getFinalResult() {
+        return finalResult;
+    }
+
     public static int getUserInput() {
         return userInput;
     }
 
-    public static int incrementNumbers() {
-        int length = (int) (Math.log10(userInput));
-        int nineCount = 0;
-        int divBy = 1;
-        List<Integer> incrementedNumberParts = new ArrayList<>();
-
-        divBy =  (int) Math.pow(10, length);
-
-        System.out.println(length);
-        System.out.println(divBy);
-        System.out.println(userInput - divBy);
-        System.out.println(userInput / divBy);
-
-        for (int i = 0; i < length; i++) {
-            int temp = 0;
-
-            if (!incrementedNumberParts.isEmpty()) {
-            }
-            System.out.println(userInput / divBy);
-            incrementedNumberParts.add(userInput / divBy);
-            divBy /= 10;
+    public static void incrementNumbers() {
+        StringBuilder preliminaryResult = new StringBuilder();
+        String input = String.valueOf(userInput);
+        for (int i = 0; i < input.length(); i++) {
+            String tempChar = String.valueOf(input.charAt(i));
+            int temp = Integer.valueOf(tempChar);
+            temp++;
+            preliminaryResult.append(temp);
         }
 
-        return 0;
+        finalResult = Integer.valueOf(preliminaryResult.toString());
     }
 
     private static void showWelcomeMessage() {

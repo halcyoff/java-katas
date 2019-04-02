@@ -65,8 +65,9 @@ public class PrintNumberTest {
     @Test
     public void testIncrementNumbers() {
         System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
+        PrintNumber.getUserInputFromConsole();
         PrintNumber.incrementNumbers();
-        assertEquals(FINAL_RESULT, PrintNumber.getUserInput());
+        assertEquals(FINAL_RESULT, PrintNumber.getFinalResult());
     }
 
     @After
