@@ -11,8 +11,8 @@ public class PrintNumber {
     public static void main(String[] args) {
         showPrompt();
         getUserInputFromConsole();
-//        userInput = 293;
         incrementNumbers();
+        showResults();
     }
 
     public static void showPrompt() {
@@ -65,5 +65,9 @@ public class PrintNumber {
 
     private static void showErrorMessage() {
         System.out.println(PrintNumberConstants.ERROR_MESSAGE);
+    }
+
+    private static void showResults() {
+        System.out.println(PrintNumberConstants.RESULTS_MESSAGE + getFinalResult());
     }
 }

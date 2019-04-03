@@ -3,9 +3,6 @@ package com.mycompany.app;
 import com.mycompany.app.Constants.PrintNumberConstants;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +11,6 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 public class PrintNumberTest {
     private final PrintStream originalOut = System.out;
@@ -23,14 +19,6 @@ public class PrintNumberTest {
     private static final int USER_INPUT = 123;
     private static final int INVALID_INPUT = -1;
     private static final int FINAL_RESULT = 234;
-
-    @Mock
-    PrintNumberTest printNumberTest;
-
-    @BeforeEach
-    public void beforeEach() {
-        initMocks(this);
-    }
 
     @Test
     public void testConsoleOutput() {
@@ -64,10 +52,14 @@ public class PrintNumberTest {
 
     @Test
     public void testIncrementNumbers() {
+        ByteArrayOutputStream outMessages = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outMessages, true));
         System.setIn(new ByteArrayInputStream(String.valueOf(USER_INPUT).getBytes()));
-        PrintNumber.getUserInputFromConsole();
-        PrintNumber.incrementNumbers();
+        String[] args = new String[0];
+        PrintNumber.main(args);
+
         assertEquals(FINAL_RESULT, PrintNumber.getFinalResult());
+        assertTrue(outMessages.toString().contains(PrintNumberConstants.RESULTS_MESSAGE));
     }
 
     @After
